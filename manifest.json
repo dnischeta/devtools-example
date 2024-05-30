@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Devtools example",
+  "description": "Basic devtools example",
+  "version": "1.0",
+  "action": {
+    "default_popup": "popups/action_default.html",
+    "default_icon": "icons/action_default.png"
+  },
+  "background": {
+    "service_worker": "workers/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-scripts/detector-shell.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-scripts/messaging-shell.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["content-scripts/detector.js"],
+      "matches": ["<all_urls>"],
+      "extension_ids": []
+    },
+    {
+      "resources": ["content-scripts/messaging.js"],
+      "matches": ["<all_urls>"],
+      "extension_ids": []
+    }
+  ],
+  "devtools_page": "panel/shell.html",
+  "permissions": ["activeTab"]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "devtools-example",
+  "version": "0.0.0",
+  "description": "Chrome devtools basic example.",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier . --write",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
+  },
+  "author": "nish.dima@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.3.0",
+    "chrome-types": "^0.1.286",
+    "eslint": "^9.3.0",
+    "globals": "^15.3.0",
+    "prettier": "3.2.5"
+  }
+}
