@@ -12,32 +12,17 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   }
 });
 
-const ports = {};
+let panelShown = false;
+const buffer = [];
 
-chrome.runtime.onConnect.addListener((port) => {
-  function messageListener(message, port) {
-    if (port === ports.content) {
-      console.log("From content");
-    } else if (port === ports.panel) {
-      console.log("From panel");
-
-      if (message === "reset") {
-        ports.content.postMessage("reset");
-      }
-    }
+chrome.runtime.onMessage.addListener((message, sender) => {
+  if (!sender.tab && message === "panel-shown") {
+    panelShown = true;
+    buffer.forEach((message) => {
+      chrome.runtime.sendMessage(message);
+    });
+    buffer.length = 0;
+  } else if (!panelShown) {
+    buffer.push(message);
   }
-
-  if (port.name === "content") {
-    ports.content = port;
-  } else if (port.name === "panel") {
-    ports.panel = port;
-  } else {
-    throw new Error("Unknown port.");
-  }
-
-  port.onMessage.addListener(messageListener);
-
-  port.onDisconnect.addListener(() => {
-    port.onMessage.removeListener(messageListener);
-  });
 });

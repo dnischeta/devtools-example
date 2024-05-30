@@ -32,7 +32,9 @@ function createPanelIfHasApp() {
         PANEL_MARKUP,
         (panel) => {
           // panel loaded
-          panel.onShown.addListener(() => {});
+          panel.onShown.addListener(() => {
+            chrome.runtime.sendMessage("panel-shown");
+          });
           panel.onHidden.addListener(() => {});
         },
       );
