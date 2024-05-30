@@ -27,12 +27,22 @@ _Notice:_ you don't have to add `panel/shell.js` neither `panel/app.html` into t
 
 ## Communication
 
+Basic communication is implemented using `chrome.runtime.sendMessage` and `chrome.tabs.sendMessage`.
+
 ### Inspected page -> devtools
 
+Content scripts may use `chrome.runtime.sendMessage` for message sending (see [messaging-shell.js](./content-scripts/messaging-shell.js)). For listening `chrome.runtime.onMessage.addListener` should be used (in `background.js` either `panel/index.js`). For that messages `sender.tab` will be presented (it can be used to distinguish messages).
+
 ### Devtools -> Inspected page
+
+To send message from `background.js` or devtools panels `chrome.tabs.sendMessage` should be used. You have to query (`chrome.tabs.query`) an active before sending a message.
+
+## Continuous communication
+
+TODO
 
 ## Additional
 
 ### TypeScript
 
-Install npm package [chrome-types](https://www.npmjs.com/package/chrome-types).
+Install npm package [chrome-types](https://www.npmjs.com/package/chrome-types) to have intellisense support.
