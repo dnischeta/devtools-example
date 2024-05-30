@@ -17,22 +17,22 @@ const ports = {};
 chrome.runtime.onConnect.addListener((port) => {
   function messageListener(message, port) {
     if (port === ports.content) {
-      console.log('From content');
+      console.log("From content");
     } else if (port === ports.panel) {
-      console.log('From panel');
+      console.log("From panel");
 
-      if (message === 'reset') {
-        ports.content.postMessage('reset');
+      if (message === "reset") {
+        ports.content.postMessage("reset");
       }
     }
   }
 
-  if (port.name === 'content') {
+  if (port.name === "content") {
     ports.content = port;
-  } else if (port.name === 'panel') {
+  } else if (port.name === "panel") {
     ports.panel = port;
   } else {
-    throw new Error('Unknown port.')
+    throw new Error("Unknown port.");
   }
 
   port.onMessage.addListener(messageListener);

@@ -5,10 +5,11 @@
 ## Configuring toolbar action
 
 There are fields in `manifest.json` which control action UI (see [example](https://developer.chrome.com/docs/extensions/reference/api/action#show_a_popup)):
+
 - `"action.default_icon"` - relative URL to the icon (eg. `"icons/action_default.png"`);
 - `"action.default_popup"` - relative URL to the action popup markup (eg. `"popups/action_default.html`").
 
-__Change action appearance__
+**Change action appearance**
 
 It's a common case for devtools: to indicate that active tab has target app for devtools. That feature may be implemented something like [that](https://developer.chrome.com/docs/extensions/reference/api/runtime#example-content-msg).
 
